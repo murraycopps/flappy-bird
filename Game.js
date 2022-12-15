@@ -110,7 +110,7 @@ export default class Game {
             this.start()
             this.restartButton = null
         }, { once: true })
-        this.restartButton.addEventListener('keydown', () => {
+        document.addEventListener('keydown', () => {
             console.log(this)
             this.element.removeChild(this.restartButton)
             this.score = 0
