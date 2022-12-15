@@ -1,2 +1,2 @@
-import Game from './game.js'
+import Game from './Game.js'
 const game = new Game()
