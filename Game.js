@@ -110,25 +110,6 @@ export default class Game {
             this.start()
             this.restartButton = null
         }, { once: true })
-        document.addEventListener('keydown', () => {
-            console.log(this)
-            this.element.removeChild(this.restartButton)
-            this.score = 0
-            this.speed = 1
-            this.timeUntilNextPipe = 0
-            this.Pipes.forEach(pipe => {
-                if (!this.element.contains(pipe.topElement)) return
-                this.element.removeChild(pipe.topElement)
-                this.element.removeChild(pipe.bottomElement)
-            })
-            this.Pipes = []
-            this.Bird.element.style.top = '50%'
-            this.Bird.speed = 0
-            this.scoreDisplay.innerText = 'Score: 0'
-            this.speedDisplay.innerText = 'Speed: 0'
-            this.start()
-            this.restartButton = null
-        }, { once: true })
 
     }
 
