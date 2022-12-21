@@ -1,6 +1,9 @@
 import Bird from './Bird.js'
 import Pipe from './Pipe.js'
 
+const viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+
+
 
 export default class Game {
     constructor() {
@@ -9,7 +12,7 @@ export default class Game {
         this.Bird = new Bird()
         this.element.appendChild(this.Bird.element)
         this.Pipes = []
-        this.speed = 1
+        this.speed = 6
         this.score = 0
         this.timeUntilNextPipe = 0
 
@@ -30,9 +33,9 @@ export default class Game {
 
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === ' ') {
+            // if (e.key === ' ') {
                 this.Bird.jump()
-            }
+            // }
         })
     }
 
@@ -72,15 +75,16 @@ export default class Game {
                 this.scoreDisplay.innerText = 'Score: ' + this.score
             })
 
-            // if bird is out of bounds
-            if (this.Bird.element.offsetTop < 0 || this.Bird.element.offsetTop > window.innerHeight) {
-                clearInterval(interval)
-                this.gameOver()
-            }
+            //if the bird is more then 400vh out of bounds
+          if (this.Bird.element.offsetTop > viewportHeight * 4 || this.Bird.element.offsetTop < -viewportHeight * 4) {
+  clearInterval(interval);
+  this.gameOver();
+}
+
 
             this.speedDisplay.innerText = 'Speed: ' + this.speed.toFixed(2)
 
-            this.speed += 0.001
+            this.speed += 0.01
         }
             , 1000 / 60)
     }
@@ -95,7 +99,7 @@ export default class Game {
             console.log(this)
             this.element.removeChild(this.restartButton)
             this.score = 0
-            this.speed = 1
+            this.speed = 6
             this.timeUntilNextPipe = 0
             this.Pipes.forEach(pipe => {
                 if (!this.element.contains(pipe.topElement)) return
